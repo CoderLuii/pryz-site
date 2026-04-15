@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap');
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: #111; font-family: 'Plus Jakarta Sans', sans-serif; display: flex; flex-direction: column; align-items: center; gap: 40px; padding: 40px; }
+
+  .og-preview {
+    width: 1200px; height: 630px; background: #050505; position: relative; overflow: hidden;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .og-preview::before {
+    content: ''; position: absolute; width: 800px; height: 800px; top: -200px; right: -200px;
+    border-radius: 50%; background: radial-gradient(circle, rgba(20, 184, 166, 0.2), transparent 70%); filter: blur(60px);
+  }
+  .og-preview::after {
+    content: ''; position: absolute; width: 600px; height: 600px; bottom: -200px; left: -100px;
+    border-radius: 50%; background: radial-gradient(circle, rgba(6, 182, 212, 0.15), transparent 70%); filter: blur(60px);
+  }
+  .og-content { position: relative; z-index: 1; display: flex; align-items: center; gap: 60px; }
+  .og-logo { width: 240px; height: 200px; object-fit: contain; }
+  .og-text h1 {
+    font-size: 80px; font-weight: 800;
+    background: linear-gradient(135deg, #14b8a6, #8b5cf6, #ec4899); -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    line-height: 1; margin-bottom: 16px;
+  }
+  .og-text p { font-size: 28px; color: #a1a1aa; font-weight: 500; max-width: 500px; line-height: 1.4; }
+  .og-badge { position: absolute; bottom: 40px; right: 50px; font-size: 18px; color: #555; font-weight: 600; z-index: 1; }
+  .og-divider { position: absolute; bottom: 0; left: 0; right: 0; height: 3px; background: linear-gradient(to right, transparent, #14b8a6, #8b5cf6, #ec4899, transparent); }
+
+  .discord-banner {
+    width: 960px; height: 540px; background: #050505; position: relative; overflow: hidden;
+    display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 24px;
+  }
+  .discord-banner::before {
+    content: ''; position: absolute; inset: 0;
+    background: radial-gradient(ellipse at center, rgba(139, 92, 246, 0.1) 0%, transparent 70%);
+  }
+  .discord-logo { width: 200px; height: 160px; object-fit: contain; position: relative; z-index: 1; }
+  .discord-title {
+    font-size: 72px; font-weight: 800;
+    background: linear-gradient(135deg, #14b8a6, #8b5cf6, #ec4899); -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    position: relative; z-index: 1;
+  }
+  .discord-sub { font-size: 22px; color: #a1a1aa; font-weight: 500; text-align: center; max-width: 600px; line-height: 1.5; position: relative; z-index: 1; }
+  .discord-divider { position: absolute; bottom: 0; left: 0; right: 0; height: 3px; background: linear-gradient(to right, transparent, #14b8a6, #8b5cf6, #ec4899, transparent); }
+
+  .avatar {
+    width: 512px; height: 512px; background: #050505; position: relative; overflow: hidden;
+    display: flex; align-items: center; justify-content: center; border-radius: 50%;
+  }
+  .avatar::before { content: ''; position: absolute; inset: 0; background: radial-gradient(circle, rgba(139, 92, 246, 0.1) 0%, transparent 70%); }
+  .avatar img { width: 340px; height: 280px; object-fit: contain; position: relative; z-index: 1; }
+
+  .avatar-square {
+    width: 512px; height: 512px; background: #050505; position: relative; overflow: hidden;
+    display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 20px;
+  }
+  .avatar-square::before { content: ''; position: absolute; inset: 0; background: radial-gradient(circle, rgba(139, 92, 246, 0.08) 0%, transparent 70%); }
+  .avatar-square img { width: 260px; height: 210px; object-fit: contain; position: relative; z-index: 1; }
+  .avatar-square span {
+    font-size: 48px; font-weight: 800;
+    background: linear-gradient(135deg, #14b8a6, #8b5cf6, #ec4899); -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    position: relative; z-index: 1;
+  }
+</style>
+</head>
+<body>
+<div class="og-preview" id="og">
+  <div class="og-content">
+    <img src="logo.png" class="og-logo" />
+    <div class="og-text"><h1>Pryz</h1><p>AI Music, Images, Text & Voice. Every creative tool, one Discord bot.</p></div>
+  </div>
+  <div class="og-badge">pryz.coderluii.dev</div>
+  <div class="og-divider"></div>
+</div>
+<div class="discord-banner" id="banner">
+  <img src="logo.png" class="discord-logo" />
+  <div class="discord-title">Pryz</div>
+  <div class="discord-sub">Multimodal AI Generation for Discord<br>Music, images, text, and voice cloning in one bot</div>
+  <div class="discord-divider"></div>
+</div>
+<div class="avatar" id="avatar-circle"><img src="logo.png" /></div>
+<div class="avatar-square" id="avatar-square"><img src="logo.png" /><span>Pryz</span></div>
+</body>
+</html>
