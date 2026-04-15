@@ -48,6 +48,12 @@ const ogImage = image.startsWith('http') ? image : `${siteUrl}${image}`;
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={ogImage} />
 
+    <script is:inline>
+      if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        document.documentElement.classList.add('landing-boot');
+      }
+    </script>
+
     <title>{title}</title>
 
     <!-- Cloudflare Web Analytics: auto-injected by Cloudflare Pages -->
@@ -97,6 +103,7 @@ const ogImage = image.startsWith('http') ? image : `${siteUrl}${image}`;
         <div class="flex items-center gap-6 mt-1">
           <a href="https://x.com/CoderLuii" target="_blank" rel="noopener noreferrer" class="landing-footer-link">Twitter</a>
           <a href="https://github.com/CoderLuii" target="_blank" rel="noopener noreferrer" class="landing-footer-link">GitHub</a>
+          <a href="https://discord.gg/mthsvesKpC" target="_blank" rel="noopener noreferrer" class="landing-footer-link">Discord</a>
           <a href="https://coderluii.dev/privacy" class="landing-footer-link">Privacy</a>
           <a href="https://coderluii.dev/terms" class="landing-footer-link">Terms</a>
         </div>
@@ -202,6 +209,19 @@ const ogImage = image.startsWith('http') ? image : `${siteUrl}${image}`;
         }, { threshold: 0.5 });
         twObserver.observe(el);
       });
+
+      if (document.documentElement.classList.contains('landing-boot')) {
+        requestAnimationFrame(() => {
+          requestAnimationFrame(() => {
+            window.setTimeout(() => {
+              document.documentElement.classList.remove('landing-boot');
+              document.documentElement.classList.add('landing-ready');
+            }, 120);
+          });
+        });
+      } else {
+        document.documentElement.classList.add('landing-ready');
+      }
     </script>
 
     <style>

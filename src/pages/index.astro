@@ -515,6 +515,16 @@ import WaitlistForm from '../components/WaitlistForm.astro';
     .pz-hero-content { animation: none; opacity: 1; }
     .pz-eq-bar, .pz-voice-dot, .pz-lg-bar { animation: none; }
   }
+
+  html.landing-boot .pz-card,
+  html.landing-boot .pz-hero-content {
+    animation-play-state: paused;
+  }
+
+  html.landing-boot .pz-card,
+  html.landing-boot .pz-hero-content {
+    opacity: 0 !important;
+  }
 </style>
 
 <script>
