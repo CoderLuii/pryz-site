@@ -1,0 +1,112 @@
+---
+interface Props {
+  product: string;
+}
+
+const { product } = Astro.props;
+const productSlug = product.toLowerCase();
+const inputId = `${productSlug}-waitlist-email`;
+const errorId = `${productSlug}-waitlist-error`;
+const noteId = `${productSlug}-waitlist-note`;
+---
+
+<div class="glass-enhanced">
+  <div class="glass-inner p-8">
+    <form class="waitlist-form" data-product={productSlug}>
+      <div class="flex flex-col sm:flex-row gap-3">
+        <label class="sr-only" for={inputId}>Email address</label>
+        <input
+          id={inputId}
+          type="email"
+          name="email"
+          placeholder="Enter your email"
+          required
+          autocomplete="email"
+          inputmode="email"
+          aria-describedby={`${noteId} ${errorId}`}
+          aria-invalid="false"
+          class="flex-1 px-5 py-3.5 rounded-full text-sm font-medium outline-none transition-all duration-300 focus:ring-2"
+          style="background: rgba(255, 255, 255, 0.06); color: var(--text); border: 1px solid rgba(255, 255, 255, 0.1);"
+        />
+        <button
+          type="submit"
+          class="btn-glow px-7 py-3.5 rounded-full font-semibold text-sm whitespace-nowrap active:scale-[0.98] transition-all duration-300"
+          style="background: var(--accent); color: #fff; border: none; cursor: pointer;"
+        >
+          Claim Your Spot
+        </button>
+      </div>
+      <p id={errorId} class="waitlist-error hidden mt-3 text-sm text-center" style="color: #e07060;" role="alert"></p>
+      <p id={noteId} class="mt-4 text-xs text-center" style="color: var(--text-muted); opacity: 0.7;">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display: inline-block; vertical-align: -2px; margin-right: 4px; opacity: 0.8;"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        First 500 get priority access. No spam, ever.
+      </p>
+    </form>
+  </div>
+</div>
+
+<style>
+  .waitlist-form input::placeholder {
+    color: var(--text-muted);
+    opacity: 0.7;
+  }
+  .waitlist-form input:focus {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 2px color-mix(in srgb, var(--accent) 20%, transparent);
+    outline: none;
+  }
+  .waitlist-form button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+  .hidden {
+    display: none !important;
+  }
+</style>
+
+<script>
+  document.querySelectorAll('.waitlist-form').forEach((form) => {
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const formEl = e.target as HTMLFormElement;
+      const product = formEl.dataset.product;
+      const input = formEl.querySelector('input[name="email"]') as HTMLInputElement;
+      const btn = formEl.querySelector('button[type="submit"]') as HTMLButtonElement;
+      const errorEl = formEl.querySelector('.waitlist-error') as HTMLElement;
+
+      const email = input.value.trim();
+      if (!email) return;
+
+      input.setAttribute('aria-invalid', 'false');
+      errorEl.classList.add('hidden');
+      btn.disabled = true;
+      btn.textContent = 'Joining...';
+
+      try {
+        const res = await fetch('https://coderluii.dev/api/waitlist', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email, product }),
+        });
+
+        const data = await res.json();
+
+        if (data.ok) {
+          window.location.href = '/thanks';
+        } else {
+          input.setAttribute('aria-invalid', 'true');
+          errorEl.classList.remove('hidden');
+          errorEl.textContent = data.error || 'Something went wrong. Please try again.';
+          btn.disabled = false;
+          btn.textContent = 'Claim Your Spot';
+        }
+      } catch {
+        input.setAttribute('aria-invalid', 'true');
+        errorEl.classList.remove('hidden');
+        errorEl.textContent = 'Connection error. Please try again.';
+        btn.disabled = false;
+        btn.textContent = 'Claim Your Spot';
+      }
+    });
+  });
+</script>
