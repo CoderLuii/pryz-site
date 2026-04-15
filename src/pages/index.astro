@@ -1,0 +1,548 @@
+---
+import LandingLayout from '../layouts/LandingLayout.astro';
+import WaitlistForm from '../components/WaitlistForm.astro';
+---
+
+<LandingLayout
+  title="Pryz — AI Music, Images, Text & Voice in One Discord Bot"
+  description="Generate music, images, text, and clone voices. All from one Discord bot. Like having Midjourney + Suno + ChatGPT + ElevenLabs in your server."
+  product="Pryz"
+  image="/promo/pryz/pryz-og.png"
+>
+  <!-- Hero: Masonry gallery -->
+  <section class="relative overflow-hidden flex flex-col items-center justify-center px-6 pz-hero">
+    <div class="gradient-mesh"></div>
+
+    <!-- Masonry grid -->
+    <div class="pz-masonry relative z-10" aria-hidden="true">
+      <!-- Image card -->
+      <div class="pz-card pz-card-img" style="--delay: 0.2s;">
+        <div class="pz-card-label">/imagine</div>
+        <div class="pz-card-body">
+          <div class="pz-img-preview"></div>
+        </div>
+      </div>
+      <!-- Music card -->
+      <div class="pz-card pz-card-music" style="--delay: 0.4s;">
+        <div class="pz-card-label">/compose</div>
+        <div class="pz-card-body">
+          <div class="pz-eq">
+            <div class="pz-eq-bar" style="--h: 60%;"></div>
+            <div class="pz-eq-bar" style="--h: 85%;"></div>
+            <div class="pz-eq-bar" style="--h: 45%;"></div>
+            <div class="pz-eq-bar" style="--h: 70%;"></div>
+            <div class="pz-eq-bar" style="--h: 90%;"></div>
+          </div>
+        </div>
+      </div>
+      <!-- Text card -->
+      <div class="pz-card pz-card-text" style="--delay: 0.6s;">
+        <div class="pz-card-label">/write</div>
+        <div class="pz-card-body">
+          <div class="pz-text-lines">
+            <div class="pz-text-line" style="width: 85%;"></div>
+            <div class="pz-text-line" style="width: 65%;"></div>
+            <div class="pz-text-line" style="width: 75%;"></div>
+          </div>
+        </div>
+      </div>
+      <!-- Voice card -->
+      <div class="pz-card pz-card-voice" style="--delay: 0.8s;">
+        <div class="pz-card-label">/voice</div>
+        <div class="pz-card-body">
+          <div class="pz-voice-dots">
+            <div class="pz-voice-dot"></div>
+            <div class="pz-voice-dot"></div>
+            <div class="pz-voice-dot"></div>
+            <div class="pz-voice-dot"></div>
+            <div class="pz-voice-dot"></div>
+          </div>
+        </div>
+      </div>
+      <!-- Extra cards for density -->
+      <div class="pz-card pz-card-img" style="--delay: 1.0s;">
+        <div class="pz-card-label">/imagine</div>
+        <div class="pz-card-body">
+          <div class="pz-img-preview" style="background: linear-gradient(135deg, #ec4899, #8b5cf6);"></div>
+        </div>
+      </div>
+      <div class="pz-card pz-card-music" style="--delay: 1.2s;">
+        <div class="pz-card-label">/compose</div>
+        <div class="pz-card-body">
+          <div class="pz-eq">
+            <div class="pz-eq-bar" style="--h: 75%;"></div>
+            <div class="pz-eq-bar" style="--h: 50%;"></div>
+            <div class="pz-eq-bar" style="--h: 90%;"></div>
+            <div class="pz-eq-bar" style="--h: 65%;"></div>
+            <div class="pz-eq-bar" style="--h: 80%;"></div>
+          </div>
+        </div>
+      </div>
+      <div class="pz-card pz-card-text" style="--delay: 1.4s;">
+        <div class="pz-card-label">/write</div>
+        <div class="pz-card-body">
+          <div class="pz-text-lines">
+            <div class="pz-text-line" style="width: 70%;"></div>
+            <div class="pz-text-line" style="width: 90%;"></div>
+          </div>
+        </div>
+      </div>
+      <div class="pz-card pz-card-voice" style="--delay: 1.6s;">
+        <div class="pz-card-label">/voice</div>
+        <div class="pz-card-body">
+          <div class="pz-voice-dots">
+            <div class="pz-voice-dot"></div>
+            <div class="pz-voice-dot"></div>
+            <div class="pz-voice-dot"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Center overlay -->
+    <div class="text-center relative z-20 pz-hero-content">
+      <img src="/promo/pryz/logo.png" alt="Pryz logo" width="100" height="100" class="mx-auto mb-5" style="filter: drop-shadow(0 0 30px rgba(20, 184, 166, 0.3));" />
+      <span class="section-label">Multimodal AI Generation</span>
+      <h1 class="text-5xl md:text-7xl font-extrabold tracking-tight mb-6 gradient-text hero-glow">Pryz</h1>
+      <p class="text-lg md:text-xl mb-10 max-w-xl mx-auto" style="color: var(--text-muted);">
+        <span class="typewriter">Generate music, images, text, and clone voices. All from one Discord bot. Every creative AI tool, one /command away.</span>
+      </p>
+      <div class="flex items-center justify-center gap-4 flex-wrap">
+        <a href="#waitlist" class="btn-glow inline-flex items-center gap-2 px-7 py-3.5 rounded-full font-semibold text-sm active:scale-[0.98]" style="background: linear-gradient(135deg, #14B8A6, #0d9488); color: #fff;">
+          Claim Your Spot
+        </a>
+        <a href="#features" class="inline-block px-7 py-3.5 rounded-full font-semibold text-sm ring-1 ring-white/[0.12] transition-all duration-700 active:scale-[0.98]" style="color: var(--text);">
+          Learn More
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <div class="shimmer-divider"></div>
+
+  <!-- Problem: Pricing counters -->
+  <section class="px-6 py-20 md:py-28 section-glow">
+    <div class="max-w-4xl mx-auto fade-in reveal-scale">
+      <span class="section-label">The Problem</span>
+      <h2 class="text-3xl md:text-4xl font-bold mb-12 section-heading">Too many AI tools, too many subscriptions</h2>
+      <div class="grid md:grid-cols-3 gap-6">
+        <div class="glass-enhanced glow-reveal stagger-card">
+          <div class="glass-inner p-8 text-center">
+            <div class="text-sm mb-2" style="color: var(--text-muted);">Midjourney</div>
+            <div class="pz-price" data-target="10">$0/mo</div>
+            <p class="text-sm mt-3" style="color: var(--text-muted);">Image generation</p>
+          </div>
+        </div>
+        <div class="glass-enhanced glow-reveal stagger-card">
+          <div class="glass-inner p-8 text-center">
+            <div class="text-sm mb-2" style="color: var(--text-muted);">ChatGPT</div>
+            <div class="pz-price" data-target="20">$0/mo</div>
+            <p class="text-sm mt-3" style="color: var(--text-muted);">AI text generation</p>
+          </div>
+        </div>
+        <div class="glass-enhanced glow-reveal stagger-card">
+          <div class="glass-inner p-8 text-center">
+            <div class="text-sm mb-2" style="color: var(--text-muted);">Suno + ElevenLabs</div>
+            <div class="pz-price" data-target="15">$0/mo</div>
+            <p class="text-sm mt-3" style="color: var(--text-muted);">Music + Voice</p>
+          </div>
+        </div>
+      </div>
+      <p class="text-center mt-8 text-lg font-semibold" style="color: var(--text-muted);">That's <span class="pz-total gradient-text" style="font-size: 1.5rem;">$45/mo</span> just for AI creative tools.</p>
+    </div>
+  </section>
+
+  <div class="shimmer-divider"></div>
+
+  <!-- Modalities showcase: Alternating panels -->
+  <section id="features" class="px-6 py-20 md:py-28 section-glow section-glow-right">
+    <div class="max-w-4xl mx-auto fade-in reveal-left">
+      <span class="section-label">One Bot, All Modalities</span>
+      <h2 class="text-3xl md:text-4xl font-bold mb-12 section-heading">Create anything with a single /command</h2>
+
+      <div class="pz-panels">
+        <!-- Image panel -->
+        <div class="pz-panel stagger-card">
+          <div class="pz-panel-text">
+            <h3 class="text-xl font-bold mb-3">Image Generation</h3>
+            <p class="text-sm" style="color: var(--text-muted);">Type a prompt, get an image. Art, memes, concept art, logos. Multiple styles and models to choose from.</p>
+            <code class="pz-panel-cmd">/imagine a sunset over cyberpunk city</code>
+          </div>
+          <div class="pz-panel-viz">
+            <div class="pz-panel-img-viz"></div>
+          </div>
+        </div>
+
+        <!-- Music panel (reversed) -->
+        <div class="pz-panel pz-panel-reverse stagger-card">
+          <div class="pz-panel-text">
+            <h3 class="text-xl font-bold mb-3">Music Generation</h3>
+            <p class="text-sm" style="color: var(--text-muted);">Describe a vibe, get a track. Lo-fi beats, epic orchestral, chill ambient. AI composed music from text prompts.</p>
+            <code class="pz-panel-cmd">/compose chill lofi beats for studying</code>
+          </div>
+          <div class="pz-panel-viz">
+            <div class="pz-panel-music-viz">
+              <div class="pz-lg-bar" style="--h: 50%; --c: #14B8A6;"></div>
+              <div class="pz-lg-bar" style="--h: 80%; --c: #8B5CF6;"></div>
+              <div class="pz-lg-bar" style="--h: 35%; --c: #14B8A6;"></div>
+              <div class="pz-lg-bar" style="--h: 65%; --c: #8B5CF6;"></div>
+              <div class="pz-lg-bar" style="--h: 90%; --c: #14B8A6;"></div>
+              <div class="pz-lg-bar" style="--h: 45%; --c: #8B5CF6;"></div>
+              <div class="pz-lg-bar" style="--h: 70%; --c: #14B8A6;"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Text panel -->
+        <div class="pz-panel stagger-card">
+          <div class="pz-panel-text">
+            <h3 class="text-xl font-bold mb-3">AI Chat & Writing</h3>
+            <p class="text-sm" style="color: var(--text-muted);">Ask questions, get summaries, brainstorm ideas, write content. A powerful AI assistant right in your server channels.</p>
+            <code class="pz-panel-cmd">/write a haiku about programming</code>
+          </div>
+          <div class="pz-panel-viz">
+            <div class="pz-panel-text-viz">
+              <div class="pz-txt-line" style="width: 90%;"></div>
+              <div class="pz-txt-line" style="width: 70%;"></div>
+              <div class="pz-txt-line" style="width: 80%;"></div>
+              <div class="pz-txt-line" style="width: 60%;"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Voice panel (reversed) -->
+        <div class="pz-panel pz-panel-reverse stagger-card">
+          <div class="pz-panel-text">
+            <h3 class="text-xl font-bold mb-3">Voice Cloning</h3>
+            <p class="text-sm" style="color: var(--text-muted);">Clone any voice and use it for TTS, announcements, or fun. Make the bot sound like anyone in your server.</p>
+            <code class="pz-panel-cmd">/voice clone @friend</code>
+          </div>
+          <div class="pz-panel-viz">
+            <div class="pz-panel-voice-viz">
+              <svg viewBox="0 0 200 60" style="width: 100%;">
+                <path d="M0,30 Q10,10 20,30 Q30,50 40,30 Q50,10 60,30 Q70,50 80,30 Q90,10 100,30 Q110,50 120,30 Q130,10 140,30 Q150,50 160,30 Q170,10 180,30 Q190,50 200,30" fill="none" stroke="#14B8A6" stroke-width="2" opacity="0.6"/>
+                <path d="M0,30 Q10,20 20,30 Q30,40 40,30 Q50,15 60,30 Q70,45 80,30 Q90,18 100,30 Q110,42 120,30 Q130,20 140,30 Q150,40 160,30 Q170,22 180,30 Q190,38 200,30" fill="none" stroke="#8B5CF6" stroke-width="2" opacity="0.4"/>
+              </svg>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="shimmer-divider"></div>
+
+  <!-- FAQ -->
+  <section class="px-6 py-20 md:py-28">
+    <div class="max-w-3xl mx-auto fade-in reveal-fade">
+      <span class="section-label">FAQ</span>
+      <h2 class="text-3xl md:text-4xl font-bold mb-12">Common questions</h2>
+      <div class="space-y-6">
+        <div class="glass-enhanced stagger-card">
+          <div class="glass-inner p-6">
+            <h3 class="font-semibold mb-2">How much will Pryz cost?</h3>
+            <p class="text-sm" style="color: var(--text-muted);">Free tier with daily generation limits. Premium for unlimited access at a fraction of what you'd pay for separate tools. Join the waitlist for early pricing.</p>
+          </div>
+        </div>
+        <div class="glass-enhanced stagger-card">
+          <div class="glass-inner p-6">
+            <h3 class="font-semibold mb-2">What AI models does it use?</h3>
+            <p class="text-sm" style="color: var(--text-muted);">We use the best available models for each modality. The specific models may change as the tech improves, but quality is always the priority.</p>
+          </div>
+        </div>
+        <div class="glass-enhanced stagger-card">
+          <div class="glass-inner p-6">
+            <h3 class="font-semibold mb-2">Can my whole server use it?</h3>
+            <p class="text-sm" style="color: var(--text-muted);">Yes. Free tier gives everyone basic access. Server owners can upgrade to premium for the whole server with one subscription.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="shimmer-divider"></div>
+
+  <!-- Waitlist -->
+  <section id="waitlist" class="px-6 py-20 md:py-28 waitlist-glow">
+    <div class="max-w-2xl mx-auto text-center fade-in reveal-scale">
+      <span class="section-label">Invite-Only Beta</span>
+      <h2 class="text-3xl md:text-4xl font-bold mb-4">Don't miss early access</h2>
+      <p class="text-base mb-10" style="color: var(--text-muted);">Spots are limited for the invite-only beta. Get every creative AI tool in one place.</p>
+      <div class="flex flex-wrap items-center justify-center gap-3 mb-8 text-xs" style="color: var(--text-muted);">
+        <span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full ring-1 ring-white/[0.08]">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          Early access pricing
+        </span>
+        <span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full ring-1 ring-white/[0.08]">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M8 12l2 2 4-4"/></svg>
+          Priority onboarding
+        </span>
+        <span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full ring-1 ring-white/[0.08]">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          Shape the product
+        </span>
+      </div>
+      <WaitlistForm product="pryz" />
+    </div>
+  </section>
+
+  <!-- Cross links -->
+  <section class="px-6 py-16">
+    <div class="max-w-4xl mx-auto fade-in">
+      <p class="text-center text-sm font-medium mb-6" style="color: var(--text-muted);">Also check out</p>
+      <div class="flex flex-wrap items-center justify-center gap-4">
+        <a href="https://dreamvoice.coderluii.dev" class="px-5 py-2.5 rounded-full text-sm font-medium ring-1 ring-white/[0.08] transition-all duration-300 hover:ring-white/[0.2] hover:no-underline" style="color: var(--text-muted);">DreamVoice</a>
+        <a href="https://dubvox.coderluii.dev" class="px-5 py-2.5 rounded-full text-sm font-medium ring-1 ring-white/[0.08] transition-all duration-300 hover:ring-white/[0.2] hover:no-underline" style="color: var(--text-muted);">Dubvox</a>
+        <a href="https://jyko.coderluii.dev" class="px-5 py-2.5 rounded-full text-sm font-medium ring-1 ring-white/[0.08] transition-all duration-300 hover:ring-white/[0.2] hover:no-underline" style="color: var(--text-muted);">Jyko</a>
+        <a href="https://sacris.coderluii.dev" class="px-5 py-2.5 rounded-full text-sm font-medium ring-1 ring-white/[0.08] transition-all duration-300 hover:ring-white/[0.2] hover:no-underline" style="color: var(--text-muted);">Sacris</a>
+      </div>
+    </div>
+  </section>
+</LandingLayout>
+
+<style>
+  /* Hero */
+  .pz-hero {
+    min-height: 100vh;
+    padding-top: 6rem;
+    padding-bottom: 3rem;
+  }
+
+  /* Masonry grid */
+  .pz-masonry {
+    position: absolute;
+    inset: 0;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    gap: 12px;
+    padding: 6rem 2rem 4rem;
+    pointer-events: none;
+    z-index: 1;
+  }
+  .pz-card {
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 12px;
+    padding: 10px;
+    opacity: 0;
+    animation: pz-card-in 0.5s cubic-bezier(0.32, 0.72, 0, 1) var(--delay, 0s) forwards;
+  }
+  @keyframes pz-card-in {
+    from { opacity: 0; transform: translateY(30px) scale(0.9); }
+    to { opacity: 0.6; transform: translateY(0) scale(1); }
+  }
+  .pz-card-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    color: #14B8A6;
+    margin-bottom: 6px;
+  }
+
+  /* Image card viz */
+  .pz-img-preview {
+    width: 100%;
+    height: 50px;
+    border-radius: 6px;
+    background: linear-gradient(135deg, #f97316, #14B8A6, #8B5CF6);
+    opacity: 0.5;
+  }
+
+  /* Music card viz */
+  .pz-eq {
+    display: flex;
+    align-items: flex-end;
+    gap: 3px;
+    height: 50px;
+  }
+  .pz-eq-bar {
+    flex: 1;
+    height: var(--h);
+    background: linear-gradient(to top, #14B8A6, #8B5CF6);
+    border-radius: 2px;
+    animation: pz-eq-bounce 1.2s ease-in-out infinite;
+    animation-delay: calc(var(--h, 50%) * 0.01);
+  }
+  @keyframes pz-eq-bounce {
+    0%, 100% { transform: scaleY(1); }
+    50% { transform: scaleY(0.4); }
+  }
+
+  /* Text card viz */
+  .pz-text-lines { display: flex; flex-direction: column; gap: 6px; }
+  .pz-text-line {
+    height: 4px;
+    background: rgba(139, 92, 246, 0.3);
+    border-radius: 2px;
+  }
+
+  /* Voice card viz */
+  .pz-voice-dots {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    height: 50px;
+  }
+  .pz-voice-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #14B8A6;
+    animation: pz-dot-pulse 1.5s ease-in-out infinite;
+  }
+  .pz-voice-dot:nth-child(2) { animation-delay: 0.15s; }
+  .pz-voice-dot:nth-child(3) { animation-delay: 0.3s; }
+  .pz-voice-dot:nth-child(4) { animation-delay: 0.45s; }
+  .pz-voice-dot:nth-child(5) { animation-delay: 0.6s; }
+  @keyframes pz-dot-pulse {
+    0%, 100% { transform: scale(1); opacity: 0.4; }
+    50% { transform: scale(1.8); opacity: 1; }
+  }
+
+  /* Hero content */
+  .pz-hero-content {
+    opacity: 0;
+    animation: pz-content-in 1s cubic-bezier(0.32, 0.72, 0, 1) 1.8s forwards;
+  }
+  @keyframes pz-content-in {
+    from { opacity: 0; transform: translateY(20px); filter: blur(8px); }
+    to { opacity: 1; transform: translateY(0); filter: blur(0); }
+  }
+
+  /* Pricing counter */
+  .pz-price {
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: var(--text);
+    position: relative;
+  }
+  .pz-price.struck::after {
+    content: '';
+    position: absolute;
+    left: -5%;
+    right: -5%;
+    top: 50%;
+    height: 3px;
+    background: #ef4444;
+    transform: rotate(-5deg);
+  }
+
+  /* Modality panels */
+  .pz-panels {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+  .pz-panel {
+    display: flex;
+    gap: 2rem;
+    align-items: center;
+    padding: 2rem;
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 1.25rem;
+  }
+  .pz-panel-reverse {
+    flex-direction: row-reverse;
+  }
+  .pz-panel-text { flex: 1; }
+  .pz-panel-viz {
+    flex: 0 0 180px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .pz-panel-cmd {
+    display: inline-block;
+    margin-top: 0.75rem;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    padding: 6px 12px;
+    border-radius: 6px;
+    background: rgba(20, 184, 166, 0.08);
+    color: #5eead4;
+    border: 1px solid rgba(20, 184, 166, 0.15);
+  }
+
+  /* Panel visualizations */
+  .pz-panel-img-viz {
+    width: 140px;
+    height: 100px;
+    border-radius: 10px;
+    background: linear-gradient(135deg, #14B8A6, #8B5CF6, #f97316);
+    opacity: 0.5;
+  }
+  .pz-panel-music-viz {
+    display: flex;
+    align-items: flex-end;
+    gap: 4px;
+    height: 80px;
+  }
+  .pz-lg-bar {
+    width: 12px;
+    height: var(--h);
+    background: var(--c);
+    border-radius: 3px;
+    opacity: 0.6;
+    animation: pz-eq-bounce 1.5s ease-in-out infinite;
+  }
+  .pz-panel-text-viz {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    width: 140px;
+  }
+  .pz-txt-line {
+    height: 5px;
+    background: rgba(139, 92, 246, 0.3);
+    border-radius: 3px;
+  }
+  .pz-panel-voice-viz {
+    width: 160px;
+  }
+
+  @media (max-width: 768px) {
+    .pz-masonry { grid-template-columns: repeat(2, 1fr); padding: 5rem 1rem 3rem; }
+    .pz-panel, .pz-panel-reverse { flex-direction: column; }
+    .pz-panel-viz { flex: none; }
+    .pz-hero { min-height: 90vh; }
+  }
+
+  /* Reduced motion */
+  @media (prefers-reduced-motion: reduce) {
+    .pz-card { animation: none; opacity: 0.6; }
+    .pz-hero-content { animation: none; opacity: 1; }
+    .pz-eq-bar, .pz-voice-dot, .pz-lg-bar { animation: none; }
+  }
+</style>
+
+<script>
+  // @ts-nocheck
+  // Price counter animation
+  const priceEls = document.querySelectorAll('.pz-price');
+  const priceObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        const el = entry.target;
+        const target = parseInt(el.dataset.target || '0');
+        let current = 0;
+        const duration = 1500;
+        const step = target / (duration / 16);
+        function count() {
+          current += step;
+          if (current >= target) {
+            el.textContent = `$${target}/mo`;
+            el.classList.add('struck');
+          } else {
+            el.textContent = `$${Math.floor(current)}/mo`;
+            requestAnimationFrame(count);
+          }
+        }
+        count();
+        priceObserver.unobserve(el);
+      }
+    });
+  }, { threshold: 0.5 });
+  priceEls.forEach((el) => priceObserver.observe(el));
+</script>
