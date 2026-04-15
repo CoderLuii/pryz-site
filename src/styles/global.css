@@ -1,0 +1,778 @@
+@import "tailwindcss";
+@import "@fontsource/plus-jakarta-sans/400.css";
+@import "@fontsource/plus-jakarta-sans/500.css";
+@import "@fontsource/plus-jakarta-sans/600.css";
+@import "@fontsource/plus-jakarta-sans/700.css";
+@import "@fontsource/plus-jakarta-sans/800.css";
+@import "@fontsource/jetbrains-mono/400.css";
+@import "@fontsource/cormorant-garamond/400.css";
+@import "@fontsource/cormorant-garamond/600.css";
+@import "@fontsource/cormorant-garamond/700.css";
+
+:root {
+  --bg: #050505;
+  --text: #fafafa;
+  --text-muted: #a1a1aa;
+  --accent: #3b82f6;
+  --card-bg: #0c0c0c;
+  --border: #27272a;
+  --ease-spring: cubic-bezier(0.32, 0.72, 0, 1);
+}
+
+html {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  scroll-behavior: smooth;
+}
+
+code, pre, .font-mono {
+  font-family: 'JetBrains Mono', monospace;
+}
+
+a {
+  color: var(--accent);
+  text-decoration: none;
+}
+a:hover {
+  text-decoration: underline;
+}
+
+/* Dot grid background */
+body {
+  background-image: radial-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+  background-size: 24px 24px;
+  position: relative;
+}
+
+/* Noise texture overlay — fixed, pointer-events-none per performance guardrails */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 30;
+  pointer-events: none;
+  opacity: 0.015;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: 256px 256px;
+}
+
+/* Selection color — uses accent per product */
+::selection {
+  background: color-mix(in srgb, var(--accent) 30%, transparent);
+  color: #fff;
+}
+
+/* Floating orb animation */
+@keyframes float-orb {
+  0%, 100% {
+    transform: translate(0, 0) scale(1);
+  }
+  25% {
+    transform: translate(30px, -40px) scale(1.1);
+  }
+  50% {
+    transform: translate(-20px, 20px) scale(0.95);
+  }
+  75% {
+    transform: translate(40px, 10px) scale(1.05);
+  }
+}
+
+/* Fade in up animation — heavier entrance with blur */
+@keyframes fade-in-up {
+  from {
+    opacity: 0;
+    filter: blur(12px);
+    transform: translateY(4rem);
+  }
+  to {
+    opacity: 1;
+    filter: blur(0);
+    transform: translateY(0);
+  }
+}
+
+/* Scroll-triggered fade-in — premium blur + translate */
+.fade-in {
+  opacity: 0;
+  filter: blur(12px);
+  transform: translateY(4rem);
+  transition: opacity 0.8s var(--ease-spring), filter 0.8s var(--ease-spring), transform 0.8s var(--ease-spring);
+}
+.fade-in.visible {
+  opacity: 1;
+  filter: blur(0);
+  transform: translateY(0);
+}
+/* No-JS fallback — show everything */
+@media (scripting: none) {
+  .fade-in { opacity: 1; filter: none; transform: none; }
+}
+
+/* Gradient text utility */
+.gradient-text {
+  background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Double-Bezel glass card — outer shell utility */
+.glass {
+  background: rgba(255, 255, 255, 0.03);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.08);
+  border-radius: 2rem;
+  padding: 0.375rem;
+}
+
+/* Double-Bezel glass card — inner core */
+.glass-inner {
+  background: var(--card-bg);
+  box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.06);
+  border-radius: calc(2rem - 0.375rem);
+}
+
+/* Glow on hover — spring physics + scale feedback */
+.glow-hover {
+  transition: box-shadow 0.3s var(--ease-spring), transform 0.3s var(--ease-spring);
+}
+.glow-hover:hover {
+  box-shadow: 0 0 40px color-mix(in srgb, var(--accent) 15%, transparent), 0 0 80px color-mix(in srgb, var(--accent) 8%, transparent);
+  transform: translateY(-3px) scale(1.02);
+}
+.glow-hover:active {
+  transform: translateY(0) scale(0.98);
+  transition-duration: 0.1s;
+}
+
+/* Eyebrow pill label */
+.section-label {
+  display: inline-block;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  color: var(--accent);
+  margin-bottom: 1rem;
+  padding: 4px 12px;
+  border-radius: 999px;
+  background: rgba(59, 130, 246, 0.08);
+  box-shadow: inset 0 0 0 1px rgba(59, 130, 246, 0.2);
+  font-weight: 500;
+}
+
+/* Skill pill badges */
+.skill-pill {
+  display: inline-block;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.7rem;
+  padding: 4px 12px;
+  border-radius: 999px;
+  background: rgba(59, 130, 246, 0.08);
+  color: #93c5fd;
+  letter-spacing: 0.05em;
+  box-shadow: inset 0 0 0 1px rgba(59, 130, 246, 0.2);
+}
+
+/* Pull quote */
+.pull-quote {
+  font-size: 1.5rem;
+  font-weight: 600;
+  line-height: 1.4;
+  background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  padding: 2rem 0;
+  text-align: center;
+  max-width: 600px;
+  margin: 2rem auto;
+}
+
+/* Timeline dot */
+.timeline-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 12px rgba(59, 130, 246, 0.5);
+  flex-shrink: 0;
+}
+
+/* Timeline line */
+.timeline-line {
+  width: 2px;
+  background: linear-gradient(to bottom, var(--accent), rgba(139, 92, 246, 0.3), transparent);
+  flex-shrink: 0;
+}
+
+/* Staggered animations */
+.fade-in-delay-1 { transition-delay: 0.1s; }
+.fade-in-delay-2 { transition-delay: 0.2s; }
+.fade-in-delay-3 { transition-delay: 0.3s; }
+.fade-in-delay-4 { transition-delay: 0.4s; }
+
+/* Touch targets */
+a, button { touch-action: manipulation; }
+
+/* Focus-visible styles */
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+a:focus-visible { border-radius: 4px; }
+a.rounded-full:focus-visible, button.rounded-full:focus-visible { border-radius: 9999px; }
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  .fade-in { transition: opacity 0.3s ease !important; filter: none !important; transform: none !important; }
+  .fade-in.visible { opacity: 1; }
+  .glow-hover { transition: none !important; }
+  .glow-hover:hover { transform: none !important; }
+  [style*="float-orb"] { animation: none !important; }
+  * { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; }
+  html { scroll-behavior: auto; }
+}
+
+/* Reduce blur on mobile */
+@media (max-width: 768px) {
+  .fade-in { filter: blur(4px); transform: translateY(2rem); }
+}
+
+/* ============================================
+   LANDING PAGE VISUAL UPGRADES
+   ============================================ */
+
+/* Animated gradient mesh background */
+.gradient-mesh {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  z-index: 0;
+}
+.gradient-mesh::before,
+.gradient-mesh::after {
+  content: '';
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  animation: mesh-float 20s cubic-bezier(0.32, 0.72, 0, 1) infinite;
+}
+.gradient-mesh::before {
+  width: 700px;
+  height: 700px;
+  top: -15%;
+  left: -15%;
+  background: radial-gradient(circle, rgba(59, 130, 246, 0.25), transparent 70%);
+}
+.gradient-mesh::after {
+  width: 600px;
+  height: 600px;
+  bottom: -15%;
+  right: -15%;
+  background: radial-gradient(circle, rgba(139, 92, 246, 0.2), transparent 70%);
+  animation-delay: -10s;
+  animation-direction: reverse;
+}
+
+@keyframes mesh-float {
+  0%, 100% { transform: translate(0, 0) scale(1) rotate(0deg); }
+  25% { transform: translate(80px, -60px) scale(1.15) rotate(5deg); }
+  50% { transform: translate(-40px, 40px) scale(0.9) rotate(-3deg); }
+  75% { transform: translate(60px, 20px) scale(1.1) rotate(2deg); }
+}
+
+/* Sacris gold gradient mesh */
+[data-product="sacris"] .gradient-mesh::before {
+  background: radial-gradient(circle, rgba(212, 168, 83, 0.25), transparent 70%);
+}
+[data-product="sacris"] .gradient-mesh::after {
+  background: radial-gradient(circle, rgba(184, 134, 11, 0.2), transparent 70%);
+}
+
+/* Particle starfield */
+.starfield {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+.star {
+  position: absolute;
+  width: 2px;
+  height: 2px;
+  background: #fff;
+  border-radius: 50%;
+  animation: star-twinkle var(--duration, 4s) ease-in-out infinite var(--delay, 0s);
+}
+@keyframes star-twinkle {
+  0%, 100% { opacity: 0.05; transform: scale(1); }
+  50% { opacity: var(--max-opacity, 0.4); transform: scale(1.5); }
+}
+
+/* Glowing pulse CTA button — unified spring easing */
+.btn-glow {
+  position: relative;
+  z-index: 1;
+  transition: transform 0.3s var(--ease-spring), box-shadow 0.3s var(--ease-spring);
+}
+.btn-glow::before {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  border-radius: 9999px;
+  background: linear-gradient(135deg, #3b82f6, #8b5cf6, #3b82f6);
+  background-size: 200% 200%;
+  z-index: -1;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+  animation: glow-rotate 3s linear infinite;
+  filter: blur(8px);
+}
+.btn-glow:hover::before {
+  opacity: 1;
+}
+.btn-glow:hover {
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 0 30px color-mix(in srgb, var(--accent) 30%, transparent), 0 0 60px color-mix(in srgb, var(--accent) 15%, transparent);
+}
+.btn-glow:active {
+  transform: translateY(0) scale(0.97);
+  transition-duration: 0.1s;
+}
+@keyframes glow-rotate {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Sacris gold glow */
+[data-product="sacris"] .btn-glow::before {
+  background: linear-gradient(135deg, #d4a853, #b8860b, #d4a853);
+  background-size: 200% 200%;
+  animation: glow-rotate 3s linear infinite;
+}
+[data-product="sacris"] .btn-glow:hover {
+  box-shadow: 0 0 30px rgba(212, 168, 83, 0.3), 0 0 60px rgba(184, 134, 11, 0.15);
+}
+
+/* Shimmer divider — re-triggers on scroll via opacity */
+.shimmer-divider {
+  height: 2px;
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(to right, transparent, color-mix(in srgb, var(--accent) 40%, transparent), color-mix(in srgb, var(--accent) 30%, transparent), transparent);
+  box-shadow: 0 0 12px color-mix(in srgb, var(--accent) 15%, transparent), 0 0 24px color-mix(in srgb, var(--accent) 8%, transparent);
+  opacity: 0.5;
+  transition: opacity 0.8s var(--ease-spring);
+}
+.shimmer-divider.visible {
+  opacity: 1;
+}
+.shimmer-divider::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+  animation: shimmer-slide 4s ease-in-out infinite;
+}
+@keyframes shimmer-slide {
+  0% { left: -100%; }
+  50% { left: 100%; }
+  100% { left: 100%; }
+}
+/* Shimmer plays once when visible, then stops */
+.shimmer-divider.visible::after {
+  animation: shimmer-slide 2.5s var(--ease-spring) forwards;
+  animation-iteration-count: 1;
+}
+
+[data-product="sacris"] { --accent: #d4a853; }
+[data-product="sacris"] .section-label {
+  color: #d4a853;
+  background: rgba(212, 168, 83, 0.08);
+  box-shadow: inset 0 0 0 1px rgba(212, 168, 83, 0.2);
+}
+[data-product="sacris"] .glow-hover:hover {
+  box-shadow: 0 0 40px rgba(212, 168, 83, 0.15), 0 0 80px rgba(184, 134, 11, 0.08);
+}
+[data-product="sacris"] .gradient-text {
+  background: linear-gradient(135deg, #d4a853, #b8860b);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Typewriter effect */
+.typewriter {
+  display: inline;
+  border-right: 2px solid var(--accent);
+  animation: blink-caret 0.8s step-end infinite;
+}
+@keyframes blink-caret {
+  0%, 100% { border-color: var(--accent); }
+  50% { border-color: transparent; }
+}
+
+/* Staggered card entrance — 80ms spacing for breathing room */
+.stagger-card {
+  opacity: 0;
+  filter: blur(8px);
+  transform: translateY(2rem);
+  transition: opacity 0.7s var(--ease-spring), filter 0.7s var(--ease-spring), transform 0.7s var(--ease-spring);
+}
+.stagger-card.visible {
+  opacity: 1;
+  filter: blur(0);
+  transform: translateY(0);
+}
+.stagger-card:nth-child(1) { transition-delay: 0.08s; }
+.stagger-card:nth-child(2) { transition-delay: 0.16s; }
+.stagger-card:nth-child(3) { transition-delay: 0.24s; }
+.stagger-card:nth-child(4) { transition-delay: 0.32s; }
+.stagger-card:nth-child(5) { transition-delay: 0.40s; }
+.stagger-card:nth-child(6) { transition-delay: 0.48s; }
+
+/* Enhanced glassmorphism */
+.glass-enhanced {
+  background: linear-gradient(135deg, rgba(59, 130, 246, 0.08), rgba(139, 92, 246, 0.05), rgba(255, 255, 255, 0.04));
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.12);
+  border-radius: 1.25rem;
+  padding: 1px;
+  position: relative;
+}
+.glass-enhanced::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 1.25rem;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, transparent 40%);
+  pointer-events: none;
+}
+.glass-enhanced .glass-inner {
+  background: linear-gradient(145deg, #141420 0%, #0e0e14 100%);
+  border-radius: calc(1.25rem - 1px);
+  box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.1), 0 8px 32px rgba(0, 0, 0, 0.4);
+}
+[data-product="sacris"] .glass-enhanced {
+  background: linear-gradient(135deg, rgba(212, 168, 83, 0.1), rgba(184, 134, 11, 0.06), rgba(255, 255, 255, 0.04));
+  box-shadow: inset 0 0 0 1px rgba(212, 168, 83, 0.15);
+}
+
+/* Hero text glow */
+.hero-glow {
+  text-shadow: 0 0 60px rgba(59, 130, 246, 0.3), 0 0 120px rgba(139, 92, 246, 0.15);
+}
+[data-product="sacris"] .hero-glow {
+  text-shadow: 0 0 60px rgba(212, 168, 83, 0.3), 0 0 120px rgba(184, 134, 11, 0.15);
+}
+
+/* ============================================
+   DUBVOX — Orange (#EA8A2E) / Navy (#1E3A5F)
+   ============================================ */
+[data-product="dubvox"] { --accent: #EA8A2E; }
+[data-product="dubvox"] .gradient-mesh::before {
+  background: radial-gradient(circle, rgba(234, 138, 46, 0.25), transparent 70%);
+}
+[data-product="dubvox"] .gradient-mesh::after {
+  background: radial-gradient(circle, rgba(30, 58, 95, 0.25), transparent 70%);
+}
+[data-product="dubvox"] .gradient-text {
+  background: linear-gradient(135deg, #EA8A2E, #F5B041);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+[data-product="dubvox"] .hero-glow {
+  text-shadow: 0 0 60px rgba(234, 138, 46, 0.3), 0 0 120px rgba(30, 58, 95, 0.2);
+}
+[data-product="dubvox"] .section-label {
+  color: #EA8A2E;
+  background: rgba(234, 138, 46, 0.08);
+  box-shadow: inset 0 0 0 1px rgba(234, 138, 46, 0.2);
+}
+[data-product="dubvox"] .btn-glow::before {
+  background: linear-gradient(135deg, #EA8A2E, #1E3A5F, #EA8A2E);
+  background-size: 200% 200%;
+  animation: glow-rotate 3s linear infinite;
+}
+[data-product="dubvox"] .btn-glow:hover {
+  box-shadow: 0 0 30px rgba(234, 138, 46, 0.3), 0 0 60px rgba(30, 58, 95, 0.15);
+}
+[data-product="dubvox"] .glow-hover:hover {
+  box-shadow: 0 0 40px rgba(234, 138, 46, 0.15), 0 0 80px rgba(30, 58, 95, 0.08);
+}
+[data-product="dubvox"] .glass-enhanced {
+  background: linear-gradient(135deg, rgba(234, 138, 46, 0.1), rgba(30, 58, 95, 0.06), rgba(255, 255, 255, 0.04));
+  box-shadow: inset 0 0 0 1px rgba(234, 138, 46, 0.15);
+}
+[data-product="dubvox"] .waitlist-form input:focus {
+  border-color: #EA8A2E;
+  box-shadow: 0 0 0 2px rgba(234, 138, 46, 0.2);
+}
+
+/* ============================================
+   JYKO — Red (#DC2626) / Orange (#F97316)
+   ============================================ */
+[data-product="jyko"] { --accent: #F97316; }
+[data-product="jyko"] .gradient-mesh::before {
+  background: radial-gradient(circle, rgba(220, 38, 38, 0.25), transparent 70%);
+}
+[data-product="jyko"] .gradient-mesh::after {
+  background: radial-gradient(circle, rgba(249, 115, 22, 0.2), transparent 70%);
+}
+[data-product="jyko"] .gradient-text {
+  background: linear-gradient(135deg, #DC2626, #F97316);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+[data-product="jyko"] .hero-glow {
+  text-shadow: 0 0 60px rgba(220, 38, 38, 0.3), 0 0 120px rgba(249, 115, 22, 0.15);
+}
+[data-product="jyko"] .section-label {
+  color: #F97316;
+  background: rgba(249, 115, 22, 0.08);
+  box-shadow: inset 0 0 0 1px rgba(249, 115, 22, 0.2);
+}
+[data-product="jyko"] .btn-glow::before {
+  background: linear-gradient(135deg, #DC2626, #F97316, #DC2626);
+  background-size: 200% 200%;
+  animation: glow-rotate 3s linear infinite;
+}
+[data-product="jyko"] .btn-glow:hover {
+  box-shadow: 0 0 30px rgba(220, 38, 38, 0.3), 0 0 60px rgba(249, 115, 22, 0.15);
+}
+[data-product="jyko"] .glow-hover:hover {
+  box-shadow: 0 0 40px rgba(220, 38, 38, 0.15), 0 0 80px rgba(249, 115, 22, 0.08);
+}
+[data-product="jyko"] .glass-enhanced {
+  background: linear-gradient(135deg, rgba(220, 38, 38, 0.08), rgba(249, 115, 22, 0.05), rgba(255, 255, 255, 0.04));
+  box-shadow: inset 0 0 0 1px rgba(249, 115, 22, 0.12);
+}
+[data-product="jyko"] .waitlist-form input:focus {
+  border-color: #F97316;
+  box-shadow: 0 0 0 2px rgba(249, 115, 22, 0.2);
+}
+
+/* ============================================
+   PRYZ — Teal (#14B8A6) / Purple (#8B5CF6)
+   ============================================ */
+[data-product="pryz"] { --accent: #14B8A6; }
+[data-product="pryz"] .gradient-mesh::before {
+  background: radial-gradient(circle, rgba(20, 184, 166, 0.25), transparent 70%);
+}
+[data-product="pryz"] .gradient-mesh::after {
+  background: radial-gradient(circle, rgba(139, 92, 246, 0.2), transparent 70%);
+}
+[data-product="pryz"] .gradient-text {
+  background: linear-gradient(135deg, #14B8A6, #8B5CF6);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+[data-product="pryz"] .hero-glow {
+  text-shadow: 0 0 60px rgba(20, 184, 166, 0.3), 0 0 120px rgba(139, 92, 246, 0.15);
+}
+[data-product="pryz"] .section-label {
+  color: #14B8A6;
+  background: rgba(20, 184, 166, 0.08);
+  box-shadow: inset 0 0 0 1px rgba(20, 184, 166, 0.2);
+}
+[data-product="pryz"] .btn-glow::before {
+  background: linear-gradient(135deg, #14B8A6, #8B5CF6, #14B8A6);
+  background-size: 200% 200%;
+  animation: glow-rotate 3s linear infinite;
+}
+[data-product="pryz"] .btn-glow:hover {
+  box-shadow: 0 0 30px rgba(20, 184, 166, 0.3), 0 0 60px rgba(139, 92, 246, 0.15);
+}
+[data-product="pryz"] .glow-hover:hover {
+  box-shadow: 0 0 40px rgba(20, 184, 166, 0.15), 0 0 80px rgba(139, 92, 246, 0.08);
+}
+[data-product="pryz"] .glass-enhanced {
+  background: linear-gradient(135deg, rgba(20, 184, 166, 0.08), rgba(139, 92, 246, 0.05), rgba(255, 255, 255, 0.04));
+  box-shadow: inset 0 0 0 1px rgba(20, 184, 166, 0.12);
+}
+[data-product="pryz"] .waitlist-form input:focus {
+  border-color: #14B8A6;
+  box-shadow: 0 0 0 2px rgba(20, 184, 166, 0.2);
+}
+
+/* ============================================
+   SACRIS — Serif Typography
+   ============================================ */
+[data-product="sacris"] {
+  font-family: 'Cormorant Garamond', 'Times New Roman', serif;
+}
+[data-product="sacris"] code,
+[data-product="sacris"] pre,
+[data-product="sacris"] .font-mono,
+[data-product="sacris"] .section-label {
+  font-family: 'JetBrains Mono', monospace;
+}
+
+/* ============================================
+   SECTION-LEVEL VISUAL ENHANCEMENTS
+   ============================================ */
+
+/* 1. Accent glow orbs behind key sections */
+.section-glow {
+  position: relative;
+}
+.section-glow::before {
+  content: '';
+  position: absolute;
+  width: 500px;
+  height: 500px;
+  border-radius: 50%;
+  background: radial-gradient(circle, color-mix(in srgb, var(--accent) 8%, transparent), transparent 70%);
+  filter: blur(60px);
+  pointer-events: none;
+  z-index: 0;
+  top: 10%;
+  left: -10%;
+}
+.section-glow > * {
+  position: relative;
+  z-index: 1;
+}
+/* Alternate orb position on even sections */
+.section-glow-right::before {
+  left: auto;
+  right: -10%;
+}
+
+/* 2. Entrance direction variety */
+.reveal-left {
+  opacity: 0;
+  filter: blur(6px);
+  transform: translateX(-3rem);
+  transition: opacity 0.7s var(--ease-spring), filter 0.7s var(--ease-spring), transform 0.7s var(--ease-spring);
+}
+.reveal-left.visible {
+  opacity: 1;
+  filter: blur(0);
+  transform: translateX(0);
+}
+.reveal-right {
+  opacity: 0;
+  filter: blur(6px);
+  transform: translateX(3rem);
+  transition: opacity 0.7s var(--ease-spring), filter 0.7s var(--ease-spring), transform 0.7s var(--ease-spring);
+}
+.reveal-right.visible {
+  opacity: 1;
+  filter: blur(0);
+  transform: translateX(0);
+}
+.reveal-scale {
+  opacity: 0;
+  filter: blur(6px);
+  transform: scale(0.92);
+  transition: opacity 0.7s var(--ease-spring), filter 0.7s var(--ease-spring), transform 0.7s var(--ease-spring);
+}
+.reveal-scale.visible {
+  opacity: 1;
+  filter: blur(0);
+  transform: scale(1);
+}
+.reveal-fade {
+  opacity: 0;
+  transition: opacity 0.8s var(--ease-spring);
+}
+.reveal-fade.visible {
+  opacity: 1;
+}
+
+/* 3. Glass card power-on glow on reveal */
+.glow-reveal {
+  transition: box-shadow 0.7s var(--ease-spring), transform 0.3s var(--ease-spring);
+}
+.glow-reveal.visible {
+  animation: card-power-on 1.2s var(--ease-spring) forwards;
+}
+@keyframes card-power-on {
+  0% { box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--accent) 30%, transparent), 0 0 20px color-mix(in srgb, var(--accent) 15%, transparent); }
+  100% { box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.12), 0 0 0 transparent; }
+}
+
+/* 4. Gradient text on section headers */
+.section-heading {
+  background: linear-gradient(135deg, var(--text) 0%, color-mix(in srgb, var(--accent) 50%, var(--text)) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* 5. Accent thread line on alternating sections */
+.accent-thread {
+  position: relative;
+}
+.accent-thread::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 15%;
+  bottom: 15%;
+  width: 2px;
+  background: linear-gradient(to bottom, transparent, color-mix(in srgb, var(--accent) 25%, transparent), transparent);
+  border-radius: 1px;
+  opacity: 0;
+  transition: opacity 0.8s var(--ease-spring);
+}
+.accent-thread.visible::after {
+  opacity: 1;
+}
+/* 6. Waitlist ambient glow — second hero moment */
+.waitlist-glow {
+  position: relative;
+  overflow: hidden;
+}
+.waitlist-glow::before {
+  content: '';
+  position: absolute;
+  width: 600px;
+  height: 600px;
+  border-radius: 50%;
+  background: radial-gradient(circle, color-mix(in srgb, var(--accent) 10%, transparent), transparent 70%);
+  filter: blur(80px);
+  pointer-events: none;
+  z-index: 0;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  opacity: 0;
+  transition: opacity 1.2s var(--ease-spring);
+}
+.waitlist-glow.visible::before {
+  opacity: 1;
+}
+.waitlist-glow > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* Reduced motion: disable all new reveals */
+@media (prefers-reduced-motion: reduce) {
+  .reveal-left, .reveal-right, .reveal-scale, .reveal-fade { opacity: 1; filter: none; transform: none; transition: none; }
+  .glow-reveal.visible { animation: none; }
+  .accent-thread::after { opacity: 0.5; transition: none; }
+  .waitlist-glow::before { opacity: 0.5; transition: none; }
+  .section-glow::before { display: none; }
+}
+
+/* Mobile: reduce orb sizes and hide thread lines */
+@media (max-width: 768px) {
+  .section-glow::before { width: 300px; height: 300px; }
+  .waitlist-glow::before { width: 350px; height: 350px; }
+  .accent-thread::after { display: none; }
+  .reveal-left, .reveal-right { transform: translateY(2rem); }
+  .reveal-left.visible, .reveal-right.visible { transform: translateY(0); }
+}
